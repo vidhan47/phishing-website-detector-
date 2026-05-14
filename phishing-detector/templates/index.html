@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <!-- <i class="fas fa-shield-alt"></i> -->
+                <span>Phishing Detector</span>
+            </div>
+            <h1>Website Safety Checker</h1>
+            <p>Enter a URL to analyze it for phishing threats.</p>
+        </header>
+
+        <main class="card">
+            <form action="/" method="POST" class="url-form">
+                <div class="input-group">
+                    <input type="text" name="url" placeholder="https://example.com" value="{{ url if url else '' }}" required>
+                    <button type="submit" onclick="this.innerText='Checking...'">
+                        Check Website
+                    </button>
+                </div>
+            </form>
+
+            <!-- Result Section -->
+            {% if result %}
+            <div class="result-container animate-fade-in">
+                <hr>
+                <div class="result-content">
+                    {% if result == "Legitimate" %}
+                        <div class="status-icon safe">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="status-text">
+                            <h3>Result: <span class="safe-text">Legitimate</span></h3>
+                            <p>This website appears safe to visit.</p>
+                        </div>
+                    {% elif result == "Phishing" %}
+                        <div class="status-icon danger">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="status-text">
+                            <h3>Result: <span class="danger-text">Phishing</span></h3>
+                            <p>Warning! This site shows signs of malicious activity.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </main>
+
+        <footer>
+            <p>&copy; 2026 term project made by vidhan 00516401524</p>
+        </footer>
+    </div>
+</body>
+</html>
